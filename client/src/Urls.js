@@ -1,0 +1,1 @@
+export const baseUrl = `https://videocalling-mt5a.onrender.com`
