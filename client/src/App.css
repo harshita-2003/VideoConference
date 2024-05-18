@@ -70,3 +70,20 @@ video{
   position: absolute;
   z-index: 1000;
 }
+
+@media screen and (max-width:469px) {
+  .stream{
+    width: 100%;
+  }
+  #boxstream {
+    position: relative;
+    display: inline-block;
+  }
+  #joinbutton{
+    font-size: 0.8em;
+    margin: 2px auto;
+  }
+  h1 {
+    margin: 1.5%;
+  }
+}
