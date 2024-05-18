@@ -81,15 +81,14 @@ const RoomPage = () => {
 
   useEffect(() => {
     peer.peer.addEventListener("track", async (ev) => {
-      const remoteStream = ev.streams;
+      const [remoteStream] = ev.streams;
       console.log("GOT TRACKS!!");
-      setRemoteStream(remoteStream[0]);
+      setRemoteStream(remoteStream);
     });
   }, []);
 
 
-  //all the function handling
-  //userjoin->callsend->callaccepted->negotiationsend->negosolved
+  
   useEffect(() => {
     socket.on("user:joined", handleUserJoined);
     socket.on("incomming:call", handleIncommingCall);
@@ -114,44 +113,41 @@ const RoomPage = () => {
   ]);
 
   return (
-    <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
-
-    <div id="mainsec">
-
-      <h1>Video Conference</h1>
-      <h3>{remoteSocketId ? "Connected" : "Waiting : No one in room"}</h3>
-      {myStream && <button id="joinbutton"  onClick={sendStreams}>Send Stream</button>}
-      {remoteSocketId && <button id="joinbutton" onClick={handleCallUser}>CALL</button>}
-      <div id="boxstream">
-      {myStream && (
-        <div className="stream">
-          <h1>My Stream</h1>
-          <ReactPlayer
-            playing
-            muted
-            height="400px"
-            width="400px"
-            style={{ margin: "26px" }} 
-            url={myStream}
-          />
+    <section>
+      <div id="mainsec">
+        <h1>Video Conference</h1>
+        <h3>{remoteSocketId ? "Connected" : "Waiting : No one in room"}</h3>
+        {myStream && <button id="joinbutton"  onClick={sendStreams}>Send Stream</button>}
+        {remoteSocketId && <button id="joinbutton" onClick={handleCallUser}>CALL</button>}
+        <div id="boxstream">
+          {myStream && (
+            <div className="stream">
+              <h1>My Stream</h1>
+              <ReactPlayer
+                playing
+                
+                height="400px"
+                width="400px"
+                style={{ margin: "26px" }} 
+                url={myStream}
+              />
+            </div>
+          )}
+          {remoteStream && (
+            <div className="stream">
+              <h1>Remote Stream</h1>
+              <ReactPlayer
+                playing
+                
+                height="400px"
+                width="400px"
+                style={{ margin: "26px" }} 
+                url={remoteStream}
+              />
+            </div>
+          )}
         </div>
-      )}
-      {remoteStream && (
-        <div className="stream">
-          <h1>Remote Stream</h1>
-          <ReactPlayer
-            playing
-            muted
-            height="400px"
-            width="400px"
-            style={{ margin: "26px" }} 
-            url={remoteStream}
-          />
-        </div>
-      )}
       </div>
-      
-    </div>
     </section>
   );
 };
