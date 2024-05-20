@@ -13,6 +13,12 @@ You can access the live application here: [Video Conference App](https://videoca
 - **Secure**: Ensures secure communication between participants.
 - **Cross-Platform**: Works on all modern web browsers and devices.
 
+## Technologies Used
+
+- **Frontend**: HTML, CSS, JavaScript, React
+- **Backend**: Node.js, Express
+- **WebRTC**: For real-time communication
+
 ## Installation
 
 To run this project locally, follow these steps:
@@ -34,12 +40,6 @@ To run this project locally, follow these steps:
    ```
 
 4. Open your browser and go to `http://localhost:3000`.
-
-## Technologies Used
-
-- **Frontend**: HTML, CSS, JavaScript, React
-- **Backend**: Node.js, Express
-- **WebRTC**: For real-time communication
 
 ## Contributing
 
